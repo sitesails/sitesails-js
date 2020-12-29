@@ -1,8 +1,8 @@
-import SiteSailsCollectionManager from 'collections';
-import SiteSailsConnectionManager from 'connections';
-import SiteSailsMemberManager from 'members';
-import SiteSailsNodeManager from 'nodes';
-import SiteSailsNotificationManager from 'notifications';
+import SiteSailsCollectionManager from '../collections';
+import SiteSailsConnectionManager from '../connections';
+import SiteSailsMemberManager from '../members';
+import SiteSailsNodeManager from '../nodes';
+import SiteSailsNotificationManager from '../notifications';
 
 import { Configuration, FetchOptions } from './types';
 import { siteSailsFetch } from './utils';

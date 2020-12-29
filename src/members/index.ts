@@ -1,6 +1,6 @@
 import FormData from 'form-data';
 
-import SiteSailsClient from 'client';
+import SiteSailsClient from '../client';
 
 import { transformMember } from './transformations';
 import {

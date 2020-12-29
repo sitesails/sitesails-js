@@ -1,3 +1,3 @@
-import SiteSailsClient from 'client';
+import SiteSailsClient from './client';
 
 export default SiteSailsClient;

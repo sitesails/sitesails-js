@@ -1,6 +1,6 @@
-import SiteSailsClient from 'client';
-
+import SiteSailsClient from '../client';
 import { Node } from '../types';
+
 import {
   CollectionSearchParams,
   CollectionGetParams,
