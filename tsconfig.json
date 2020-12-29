@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "lib": ["es2018", "DOM"],
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "target": "es5",
+    "outDir": "lib",
+    "baseUrl": "./src",
+    "esModuleInterop": true,
+    "typeRoots": [
+      "./node_modules/@types/"
+    ],
+  },
+  "include": [
+    "src/**/*.ts",
+  ],
+  "exclude": [
+    "node_modules",
+  ],
+}
