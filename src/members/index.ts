@@ -1,14 +1,7 @@
-import FormData from 'form-data';
-
 import SiteSailsClient from '../client';
 
 import { transformMember } from './transformations';
-import {
-  Member,
-  MemberAvatarUpdateParams,
-  MemberSocialLoginParams,
-  MemberUpdateParams,
-} from './types';
+import { Member, MemberSocialLoginParams, MemberUpdateParams } from './types';
 
 export default class SiteSailsMemberManager {
   client: SiteSailsClient;
@@ -72,19 +65,19 @@ export default class SiteSailsMemberManager {
     return result;
   }
 
-  async updateAvatar(params: MemberAvatarUpdateParams): Promise<Member> {
-    const formData = new FormData();
-    formData.append('file', params.file, params.fileName);
-
-    const result = await this.client.fetch(`/members/me/avatar`, null, {
-      transformation: transformMember,
-      method: 'POST',
-      formData,
-      headers: {
-        Authorization: `Bearer ${this.memberToken}`,
-      },
-    });
-
-    return result;
-  }
+  // TODO: make this work. When called from outside, it doesn't send the correct
+  //       form data and we're getting back 400
+  //
+  // async updateAvatar(formData: any) {
+  //   const result = await fetch(
+  //     `https://api-next.sitesails.com/api/v1/members/me/avatar`,
+  //     {
+  //       method: 'POST',
+  //       headers: {
+  //         Authorization: `Bearer ${this.memberToken}`,
+  //       },
+  //       body: formData,
+  //     },
+  //   );
+  // }
 }

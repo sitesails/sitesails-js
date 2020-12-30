@@ -19,8 +19,3 @@ export type MemberUpdateParams = {
   lastName?: string;
   hasNotificationConsent?: boolean;
 };
-
-export type MemberAvatarUpdateParams = {
-  file: any;
-  fileName: string;
-};
