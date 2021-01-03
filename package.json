@@ -1,6 +1,6 @@
 {
   "name": "sitesails",
-  "version": "0.9.8",
+  "version": "0.9.9",
   "description": "Javascript library for the SiteSails API.",
   "author": "SiteSails <support@sitesails.com>",
   "license": "MIT",
@@ -40,7 +40,7 @@
     "typescript": "^4.1.3"
   },
   "dependencies": {
-    "form-data": "^3.0.0",
-    "whatwg-fetch": "^3.5.0"
+    "cross-fetch": "^3.0.6",
+    "form-data": "^3.0.0"
   }
 }
