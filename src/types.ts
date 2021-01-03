@@ -11,6 +11,10 @@ export type NodeImage = {
   mediumUrl: string;
 };
 
+export type NodeEvent = {
+  occurences: Date[];
+};
+
 export type Node = {
   id: number;
   slug: string;
@@ -21,6 +25,7 @@ export type Node = {
   publishedFrom: Date | null;
   connections: any;
   connectionStats: any;
+  event: NodeEvent;
 };
 
 export type ResponseMeta = {
