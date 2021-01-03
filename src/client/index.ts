@@ -1,8 +1,10 @@
-import SiteSailsCollectionManager from '../collections';
-import SiteSailsConnectionManager from '../connections';
-import SiteSailsMemberManager from '../members';
 import SiteSailsNodeManager from '../nodes';
+import SiteSailsMemberManager from '../members';
+import SiteSailsConnectionManager from '../connections';
+import SiteSailsCollectionManager from '../collections';
 import SiteSailsNotificationManager from '../notifications';
+import SiteSailsStripeIntegration from '../integrations/stripe';
+import SiteSailsMailChimpIntegration from '../integrations/mailchimp';
 
 import { Configuration, FetchOptions } from './types';
 import { siteSailsFetch } from './utils';
@@ -42,4 +44,9 @@ export default class SiteSailsClient {
   notifications() {
     return new SiteSailsNotificationManager(this);
   }
+
+  integrations = {
+    mailchimp: new SiteSailsMailChimpIntegration(this),
+    stripe: new SiteSailsStripeIntegration(this),
+  };
 }
