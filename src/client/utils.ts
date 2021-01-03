@@ -1,3 +1,5 @@
+import fetch from 'cross-fetch';
+
 import { Configuration, FetchOptions } from './types';
 
 function getQueryString(params: any) {
