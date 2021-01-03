@@ -1,4 +1,4 @@
-import fetch from 'cross-fetch';
+import axios from 'axios';
 
 import { Configuration, FetchOptions } from './types';
 
@@ -16,37 +16,35 @@ async function fetchJson(url: string, options?: any) {
     console.warn(url);
   }
 
-  let body;
+  try {
+    let headers = options.headers || {};
 
-  if (options?.formData) {
-    body = options.formData;
-  } else if (options?.body) {
-    body = JSON.stringify(options?.body);
-  }
+    if (options?.formData) {
+      headers = { ...headers, ...options.formData.getHeaders() };
+    }
 
-  const result = await fetch(url, {
-    method: options?.method || 'GET',
-    body,
-    headers: {
-      'Content-Type': options?.formData ? undefined : 'application/json',
-      ...(options.headers || {}),
-    },
-  });
+    const result = await axios({
+      method: options?.method || 'GET',
+      url,
+      data: options?.body || options?.formData,
+      headers,
+    });
 
-  if (!result.ok) {
+    if (result.status === 404) {
+      return null;
+    }
+
+    if (result.status === 204) {
+      return null;
+    }
+
+    return result.data;
+  } catch (ex) {
     // eslint-disable-next-line
-    console.error(result);
+    console.error(ex);
   }
 
-  if (result.status === 404) {
-    return null;
-  }
-
-  if (result.status === 204) {
-    return null;
-  }
-
-  return result.json();
+  return null;
 }
 
 export async function siteSailsFetch(

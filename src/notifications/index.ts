@@ -19,9 +19,6 @@ export default class SiteSailsNotificationManager {
     await this.client.fetch(`/contact`, null, {
       method: 'POST',
       formData,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
     });
   }
 }
