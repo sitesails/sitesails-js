@@ -1,5 +1,12 @@
 import { ResponseMeta, Node } from '../types';
 
+export type NodeInclude =
+  | 'unpublished'
+  | 'content'
+  | 'contents'
+  | 'images'
+  | 'onlytranslated';
+
 export type NodeSearchParams = {
   category?: string | number;
   pageNumber?: number;
@@ -13,6 +20,7 @@ export type NodeSearchParams = {
   sortBy?: string;
   sortDirection?: string;
   filters?: any;
+  include?: NodeInclude[];
 };
 
 export type NodeGetParams = {
