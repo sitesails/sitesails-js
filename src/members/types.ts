@@ -8,6 +8,19 @@ export type Member = {
   hasNotificationConsent: boolean;
 };
 
+export type MemberRegistrationParams = {
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+  hasNotificationConsent?: boolean;
+};
+
+export type MemberLoginParams = {
+  email: string;
+  password: string;
+};
+
 export type MemberSocialLoginParams = {
   idToken?: string;
   accessToken?: string;

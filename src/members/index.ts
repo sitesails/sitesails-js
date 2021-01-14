@@ -3,7 +3,13 @@ import FormData from 'form-data';
 import SiteSailsClient from '../client';
 
 import { transformMember } from './transformations';
-import { Member, MemberSocialLoginParams, MemberUpdateParams } from './types';
+import {
+  Member,
+  MemberLoginParams,
+  MemberRegistrationParams,
+  MemberSocialLoginParams,
+  MemberUpdateParams,
+} from './types';
 
 export default class SiteSailsMemberManager {
   client: SiteSailsClient;
@@ -36,6 +42,26 @@ export default class SiteSailsMemberManager {
     } else {
       throw new Error('You must provide id or a member token');
     }
+
+    return result;
+  }
+
+  async register(params: MemberRegistrationParams): Promise<Member> {
+    const result = await this.client.fetch(`/members/register`, null, {
+      transformation: transformMember,
+      method: 'POST',
+      body: params,
+    });
+
+    return result;
+  }
+
+  async login(params: MemberLoginParams): Promise<Member> {
+    const result = await this.client.fetch(`/members/authenticate`, null, {
+      transformation: transformMember,
+      method: 'POST',
+      body: params,
+    });
 
     return result;
   }
