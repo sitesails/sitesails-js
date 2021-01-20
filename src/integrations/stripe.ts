@@ -20,11 +20,11 @@ export default class SiteSailsStripeIntegration {
 
   async createSession(
     params: StripeCreateSessionParams,
-    isProduction: boolean,
+    isLive: boolean,
   ): Promise<string | null> {
     const urlParams = {
       sectionId: params.sectionId,
-      isProduction,
+      isLive,
     };
 
     const body = {
