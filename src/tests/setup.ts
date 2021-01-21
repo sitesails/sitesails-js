@@ -16,6 +16,8 @@ export const fetchNodes = async (params: NodeSearchParams = {}) => {
 export const getNode = async (id: string, params: NodeSearchParams = {}) => {
   const res = await ss.nodes('products').get(id, params);
 
+  console.log('just logging nodes here', res);
+
   return res;
 };
 
