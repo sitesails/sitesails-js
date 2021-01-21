@@ -1,4 +1,4 @@
-import { NodeSearchParams } from 'nodes/types';
+import { NodeGetParams, NodeSearchParams } from 'nodes/types';
 import SiteSails from '../index';
 
 const ss = new SiteSails({
@@ -13,10 +13,8 @@ export const fetchNodes = async (params: NodeSearchParams = {}) => {
 
   return res;
 };
-export const getNode = async (id: string, params: NodeSearchParams = {}) => {
+export const getNode = async (id: string, params: NodeGetParams = {}) => {
   const res = await ss.nodes('products').get(id, params);
-
-  console.log('just logging nodes here', res);
 
   return res;
 };
@@ -26,5 +24,15 @@ export const fetchNodeCategories = async (
   params: NodeSearchParams = {},
 ) => {
   const res = await ss.nodes(section).categories(params);
+  return res;
+};
+
+export const getNodeCategory = async (
+  section: string,
+  category: string,
+  params: NodeGetParams = {},
+) => {
+  const res = await ss.nodes(section).category(category, params);
+
   return res;
 };
