@@ -47,17 +47,40 @@ describe('Api nodes', () => {
   it('should be of specific shape when fetched', async () => {
     const slug = 'football';
     const expectedProduct = {
-      author: '',
-      title: 'Football',
-      description: '',
-      text: '',
-      whatIsIt: '',
-      modelNumber: '',
-      recommended: false,
+      id: 2856,
+      slug: 'football',
+      sectionId: 59,
+      languageId: 'en',
+      isPublished: true,
+      publishedFrom: '2021-01-21T08:58:00',
+      publishedTo: null,
+      createdAt: '2021-01-21T09:59:15.465864',
+      updatedAt: '2021-01-21T09:59:15.465864',
+      category: { id: 2854, slug: 'sport', name: 'sport', itemCount: null },
+      data: {
+        author: '',
+        title: 'Football',
+        description: '',
+        text: '',
+        whatIsIt: '',
+        modelNumber: '',
+        recommended: false,
+      },
+      seoMetadata: '[]',
+      image: null,
+      images: [],
+      contents: null,
+      connectionStats: null,
+      connections: {},
+      event: null,
+      collectionItems: null,
+      subsections: null,
     };
 
-    const { data } = await getNode(slug);
+    const node = await getNode(slug);
 
-    expect(data).toEqual(expectedProduct);
+    expect(node).toEqual(expectedProduct);
   });
 });
+
+describe('Api connections', () => {});
