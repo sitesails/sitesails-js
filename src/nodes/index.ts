@@ -19,7 +19,7 @@ export default class SiteSailsNodeManager {
 
   async search<T = Node>(
     params: NodeSearchParams,
-    transformation?: NodeResponseTransformation<T>
+    transformation?: NodeResponseTransformation<T>,
   ): Promise<NodeSearchResult<T>> {
     return this.client.fetch(`/nodes/${this.section}`, params, {
       transformation,
@@ -30,7 +30,7 @@ export default class SiteSailsNodeManager {
   async get<T = Node>(
     id: number | string,
     params?: NodeGetParams,
-    transformation?: NodeResponseTransformation<T>
+    transformation?: NodeResponseTransformation<T>,
   ): Promise<T> {
     return this.client.fetch(`/nodes/${this.section}/${id}`, params, {
       transformation,
@@ -39,7 +39,7 @@ export default class SiteSailsNodeManager {
 
   async categories<T = Node>(
     params: NodeSearchParams,
-    transformation?: NodeResponseTransformation<T>
+    transformation?: NodeResponseTransformation<T>,
   ): Promise<NodeSearchResult<T>> {
     return this.client.fetch(`/nodes/${this.section}/categories`, params, {
       transformation,
@@ -50,14 +50,14 @@ export default class SiteSailsNodeManager {
   async category<T = Node>(
     id: number | string,
     params?: NodeGetParams,
-    transformation?: NodeResponseTransformation<T>
+    transformation?: NodeResponseTransformation<T>,
   ): Promise<T> {
     return this.client.fetch(
       `/nodes/${this.section}/categories/${id}`,
       params,
       {
         transformation,
-      }
+      },
     );
   }
 }

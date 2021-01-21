@@ -22,7 +22,7 @@ export const getProduct = async (id: string, params: NodeSearchParams = {}) => {
 
 export const fetchCategories = async (
   section: string,
-  params: NodeSearchParams = {}
+  params: NodeSearchParams = {},
 ) => {
   const res = await ss.nodes(section).categories(params);
   return res;
