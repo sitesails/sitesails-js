@@ -8,19 +8,18 @@ const ss = new SiteSails({
   publicApiKey: '66461de9-b081-43ed-87c4-7fa098829251',
 });
 
-export const fetchProducts = async (params: NodeSearchParams = {}) => {
-  // TODO TEMP SEARCH PARAMS IF I NEED SOME
+export const fetchNodes = async (params: NodeSearchParams = {}) => {
   const res = await ss.nodes('products').search(params);
 
   return res;
 };
-export const getProduct = async (id: string, params: NodeSearchParams = {}) => {
+export const getNode = async (id: string, params: NodeSearchParams = {}) => {
   const res = await ss.nodes('products').get(id, params);
 
   return res;
 };
 
-export const fetchCategories = async (
+export const fetchNodeCategories = async (
   section: string,
   params: NodeSearchParams = {},
 ) => {
