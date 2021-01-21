@@ -51,7 +51,7 @@ export async function siteSailsFetch(
   configuration: Configuration,
   routeUrl: string,
   params: any,
-  options?: FetchOptions
+  options?: FetchOptions,
 ) {
   let queryParams: any = {};
 
@@ -83,7 +83,7 @@ export async function siteSailsFetch(
       body: options?.body,
       headers: options?.headers,
       formData: options?.formData,
-    }
+    },
   );
 
   if (options?.list) {
