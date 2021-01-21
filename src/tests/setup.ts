@@ -1,14 +1,16 @@
-import { MemberLoginParams } from 'members/types';
+import { Member, MemberLoginParams } from 'members/types';
 import { NodeGetParams, NodeSearchParams } from 'nodes/types';
 import SiteSails, { MemberRegistrationParams } from '../index';
 
-const ss = new SiteSails({
+export const ss = new SiteSails({
   apiUrl: 'https://api.sitesails.com/api/v1',
   // TODOD admin COPIED FROM CGH
   // adminApiKey: '0fe40734-ae13-4eee-9782-df342c203bda',
   adminApiKey: null,
   publicApiKey: '66461de9-b081-43ed-87c4-7fa098829251',
 });
+
+// TODO DELETE HELPER FUNCTIONS
 
 // NODES
 export const fetchNodes = async (params: NodeSearchParams = {}) => {
@@ -42,7 +44,6 @@ export const getNodeCategory = async (
 
 // MEMBERS
 
-// TODO CREATE A MEMBER
 export const registerMember = async (
   registerDetails: MemberRegistrationParams,
 ) => {
@@ -50,8 +51,6 @@ export const registerMember = async (
 
   return res;
 };
-
-// TODO LOGIN MEMBER
 
 export const loginMember = async (loginDetails: MemberLoginParams) => {
   const res = await ss.members().login(loginDetails);
@@ -72,3 +71,22 @@ export const loginMember = async (loginDetails: MemberLoginParams) => {
 // /* MEMBER FAILS TESTING */
 
 // CONNECTIONS
+
+// TODO ADD LIKE
+export const addConnection = async (
+  connection: string,
+  member: Member,
+  productId: number,
+) => {
+  const res = ss
+    .connections(connection)
+    .add({ memberToken: member.token, nodeId: productId });
+
+  return res;
+};
+
+// TODO REMOVE LIKE
+
+// TODO SEARCH CONNECTIONS
+
+//
