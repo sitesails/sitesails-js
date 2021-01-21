@@ -28,6 +28,8 @@ export type Node = {
   connections: any;
   connectionStats: any;
   event: NodeEvent;
+  // TODO ADDED LANGUAGE ID? TO BE ABLE TO ACCESS LANGUAGE IN THE TESTS
+  languageId?: string;
 };
 
 export type ResponseMeta = {
