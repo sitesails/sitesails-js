@@ -14,6 +14,11 @@ export const fetchProducts = async (params: NodeSearchParams = {}) => {
 
   return res;
 };
+export const getProduct = async (id: string, params: NodeSearchParams = {}) => {
+  const res = await ss.nodes('products').get(id, params);
+
+  return res;
+};
 
 export const fetchCategories = async (
   section: string,

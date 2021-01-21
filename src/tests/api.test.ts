@@ -1,4 +1,4 @@
-import { fetchCategories, fetchProducts } from './setup';
+import { fetchCategories, fetchProducts, getProduct } from './setup';
 
 describe('Api products', () => {
   it('should all be fetched correctly', async () => {
@@ -27,7 +27,37 @@ describe('Api products', () => {
     expect(data).toHaveLength(2);
   });
 
-  // test that specified product should be fetched
-  // test that specified product in some language should be fetched
-  // test that specified product has a specific shape
+  it('should fetch a specified product', async () => {
+    const slug = 'football';
+
+    const { data } = await getProduct(slug);
+
+    expect(data.title).toEqual('Football');
+  });
+
+  it('should fetch a specified product in specified language', async () => {
+    const slug = 'football';
+    const lang = 'hr';
+
+    const { data } = await getProduct(slug, { lang });
+
+    expect(data.title).toEqual('Nogometna lopta');
+  });
+
+  it('should be of specific shape when fetched', async () => {
+    const slug = 'football';
+    const expectedProduct = {
+      author: '',
+      title: 'Football',
+      description: '',
+      text: '',
+      whatIsIt: '',
+      modelNumber: '',
+      recommended: false,
+    };
+
+    const { data } = await getProduct(slug);
+
+    expect(data).toEqual(expectedProduct);
+  });
 });
