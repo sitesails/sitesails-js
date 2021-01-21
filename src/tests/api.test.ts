@@ -95,8 +95,6 @@ describe('Api nodes', () => {
     expect(data[0].languageId).toEqual(lang);
   });
 
-  // test that specified category is fetched
-
   it('category should be fetched correctly', async () => {
     const section = 'products';
     const category = 'food';
@@ -106,8 +104,6 @@ describe('Api nodes', () => {
     expect(data.name).toEqual(category);
   });
 
-  // test that specified category is fetched in specified langauge
-
   it('category should be fetched in specified language', async () => {
     const section = 'products';
     const category = 'food';
@@ -116,8 +112,6 @@ describe('Api nodes', () => {
     const { data } = await getNodeCategory(section, category, { lang });
     expect(data.name).toEqual('hrana');
   });
-
-  // test that specified category is fetched in specific shape
 
   it('category should be fetched in specific shape', async () => {
     const section = 'products';
