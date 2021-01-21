@@ -1,27 +1,17 @@
 {
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": [
-      "./tsconfig.json",
-      "./tsconfig.eslint.json"
-    ]
+    "project": ["./tsconfig.json", "./tsconfig.eslint.json"]
   },
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [
-          ".ts"
-        ],
-        "paths": [
-          "src"
-        ]
+        "extensions": [".ts"],
+        "paths": ["src"]
       }
     }
   },
-  "plugins": [
-    "prettier",
-    "jest"
-  ],
+  "plugins": ["prettier", "jest"],
   "extends": [
     "airbnb-base",
     "plugin:@typescript-eslint/recommended",
