@@ -7,7 +7,10 @@ export const ss = new SiteSails({
   // TODOD admin COPIED FROM CGH
   // adminApiKey: '0fe40734-ae13-4eee-9782-df342c203bda',
   adminApiKey: null,
+  // adminApiKey: '66461de9-b081-43ed-87c4-7fa098829251',
   publicApiKey: '66461de9-b081-43ed-87c4-7fa098829251',
+  // publicApiKey: null,
+  debug: true,
 });
 
 // TODO DELETE HELPER FUNCTIONS

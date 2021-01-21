@@ -1,11 +1,4 @@
-import {
-  // addConnection,
-  // fetchNodeCategories,
-  // fetchNodes,
-  // getNode,
-  loginMember,
-  ss,
-} from './setup';
+import { ss } from './setup';
 
 const userData = {
   email: 'karlo.marinovic@init.hr',
@@ -20,6 +13,7 @@ describe('Api nodes', () => {
   it('should all be fetched correctly', async () => {
     const nodes = 'products';
     const { data } = await ss.nodes(nodes).search({});
+
     expect(data).toHaveLength(4);
   });
 
@@ -145,13 +139,19 @@ describe('Api nodes', () => {
     expect(res).toEqual(expectedResponse);
   });
 });
-describe('Api members', () => {
-  test('should register new user correctly', async () => {
-    // TODO ADD DYNAMIC EMAIL SO NO EMAIL CONFLICT
-    // await registerMember(userData);
-  });
 
-  test('should login existing user corectly', async () => {
+describe('Api members', () => {
+  // it('should register new user correctly', async () => {
+  // TODO ADD DYNAMIC EMAIL SO NO EMAIL CONFLICT
+  // const res = await ss.members().register({
+  //   email: 'karlo.marinovic@init.hr',
+  //   firstName: 'Karlo',
+  //   lastName: 'Marinović',
+  //   password: 'matrixmatrix',
+  // });
+  // console.log('res', res);
+  // });
+  it('should login existing user corectly', async () => {
     const expectedLoginResponse = {
       id: 0,
       token: '',
@@ -161,30 +161,82 @@ describe('Api members', () => {
       avatarUrl: null,
       hasNotificationConsent: true,
     };
-
     const expectedKeys = Object.keys(expectedLoginResponse);
     const res = await ss
       .members()
       .login({ email: userData.email, password: userData.password });
     const resKeys = Object.keys(res);
-
     expect(resKeys).toEqual(expectedKeys);
   });
 });
 
 describe('Api connections', () => {
-  // test that a node can be liked
+  const connection = 'likes';
+  // const productId = 2856;
+  // it('adds a connection to a node correctly', async () => {
+  //   const expectedConnectionResponse = {
+  //     id: 67,
+  //     parentId: null,
+  //     nodeId: 2856,
+  //     nodeName: 'Football',
+  //     nodeSlug: 'football',
+  //     nodeImageUrl: 'https://api.sitesails.com/public/',
+  //     memberId: 11,
+  //     memberFirstName: 'Karlo',
+  //     memberLastName: 'Marinović',
+  //     memberAvatarUrl: null,
+  //     createdAt: '01/21/2021 19:28:36',
+  //     data: {},
+  //     contents: null,
+  //   };
+  //   const expectedConnectionKeys = Object.keys(expectedConnectionResponse);
 
-  it('adds a connection to a node correctly', async () => {
-    // const connection = 'likes';
-    // // const productId =
-    // const loggedUser = await loginMember({
-    //   email: userData.email,
-    //   password: userData.password,
+  //   const { token } = await ss
+  //     .members()
+  //     .login({ email: userData.email, password: userData.password });
+  //   const res = await ss.connections(connection).add({
+  //     memberToken: token,
+  //     nodeId: productId,
+  //   });
+  //   const resKeys = Object.keys(res);
+
+  //   expect(resKeys).toEqual(expectedConnectionKeys);
+  // });
+  it('should place connection type to a node response when connection added', async () => {
+    // const slug = 'football';
+    // const nodes = 'products';
+
+    // const { token } = await ss
+    //   .members()
+    //   .login({ email: userData.email, password: userData.password });
+
+    // await ss.connections(connection).remove({
+    //   memberToken: token,
+    //   nodeId: productId,
     // });
-    // const res = await addConnection(connection, loggedUser,  )
+
+    // await ss.connections(connection).add({
+    //   memberToken: token,
+    //   nodeId: productId,
+    //   data: { isLiked: true },
+    // });
+
+    // FETCH A NODE
+    // const res = await ss.nodes(nodes).get(slug);
+    // console.log('product res', res);
+    // expect(data.title).toEqual('Football');
+    // ASSERT THAT A NODE HAS VALID CONNECTION PROPERTIES
+
+    // SEARCH CONNECTIONS
+    const resConnectionSearch = await ss
+      .connections(connection)
+      .search({ node: 'football' });
+    console.log('response', resConnectionSearch);
+
+    // FETCH A NODE
+    const res = await ss
+      .nodes('products')
+      .get('football', { connections: 'likes' });
+    console.log('product res', res.connections);
   });
-  // test taht a node can be unliked
-  // test that a node has a like when fetched
-  // test search for connections on a node?
 });
