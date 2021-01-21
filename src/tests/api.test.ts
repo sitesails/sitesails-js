@@ -3,6 +3,8 @@ import {
   fetchNodes,
   getNode,
   getNodeCategory,
+  loginMember,
+  // registerMember,
 } from './setup';
 
 describe('Api nodes', () => {
@@ -150,5 +152,44 @@ describe('Api nodes', () => {
     expect(res).toEqual(expectedResponse);
   });
 });
+describe('Api members', () => {
+  const userData = {
+    email: 'karlo.marinovic@init.hr',
+    firstName: 'Karlo',
+    lastName: 'Marinović',
+    password: 'matrixmatrix',
+  };
+  test('should register new user correctly', async () => {
+    // await registerMember(userData);
+  });
 
-describe('Api connections', () => {});
+  test('should login existing user corectly', async () => {
+    const expectedLoginResponse = {
+      id: 9,
+      token: 'token',
+      email: 'karlo.marinovic@init.hr',
+      firstName: 'Karlo',
+      lastName: 'Marinović',
+      avatarUrl: null,
+      hasNotificationConsent: true,
+    };
+
+    const expectedKeys = Object.keys(expectedLoginResponse);
+
+    const res = await loginMember({
+      email: userData.email,
+      password: userData.password,
+    });
+
+    const resKeys = Object.keys(res);
+
+    expect(resKeys).toEqual(expectedKeys);
+  });
+});
+
+describe('Api connections', () => {
+  // test that a node can be liked
+  // test taht a node can be unliked
+  // test that a node has a like when fetched
+  // test search for connections on a node?
+});
