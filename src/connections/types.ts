@@ -29,6 +29,7 @@ export type ConnectionSearchParams = {
   node: string | number;
   memberId?: number;
   lang?: string;
+  verified?: boolean;
 };
 
 export type ConnectionAddParams = {
