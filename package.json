@@ -1,6 +1,6 @@
 {
   "name": "sitesails",
-  "version": "0.9.18",
+  "version": "0.9.19",
   "description": "Javascript library for the SiteSails API.",
   "author": "SiteSails <support@sitesails.com>",
   "license": "MIT",
