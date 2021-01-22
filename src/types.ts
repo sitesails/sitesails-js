@@ -18,6 +18,8 @@ export type NodeEvent = {
 export type Node = {
   id: number;
   slug: string;
+  slugs: Record<string, string>;
+  languageId: string;
   data: any;
   category: NodeCategory | null;
   images: NodeImage[] | null;

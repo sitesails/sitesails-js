@@ -1,3 +1,4 @@
+import { NodeInclude } from '../nodes/types';
 import { ResponseMeta, Node } from '../types';
 
 export type CollectionItem = {
@@ -19,6 +20,7 @@ export type CollectionSearchParams = {
   sortDirection?: string;
   filters?: any;
   collectionItemNode?: string | number;
+  include?: NodeInclude[];
 };
 
 export type CollectionGetParams = {
