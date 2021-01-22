@@ -172,71 +172,87 @@ describe('Api members', () => {
 
 describe('Api connections', () => {
   const connection = 'likes';
-  // const productId = 2856;
-  // it('adds a connection to a node correctly', async () => {
-  //   const expectedConnectionResponse = {
-  //     id: 67,
-  //     parentId: null,
-  //     nodeId: 2856,
-  //     nodeName: 'Football',
-  //     nodeSlug: 'football',
-  //     nodeImageUrl: 'https://api.sitesails.com/public/',
-  //     memberId: 11,
-  //     memberFirstName: 'Karlo',
-  //     memberLastName: 'Marinović',
-  //     memberAvatarUrl: null,
-  //     createdAt: '01/21/2021 19:28:36',
-  //     data: {},
-  //     contents: null,
-  //   };
-  //   const expectedConnectionKeys = Object.keys(expectedConnectionResponse);
+  const productId = 2856;
+  const slug = 'football';
+  const nodes = 'products';
 
-  //   const { token } = await ss
-  //     .members()
-  //     .login({ email: userData.email, password: userData.password });
-  //   const res = await ss.connections(connection).add({
-  //     memberToken: token,
-  //     nodeId: productId,
-  //   });
-  //   const resKeys = Object.keys(res);
+  it('should return a correct response after adding a connection to a node', async () => {
+    const expectedConnectionResponse = {
+      id: 67,
+      parentId: null,
+      nodeId: 2856,
+      nodeName: 'Football',
+      nodeSlug: 'football',
+      nodeImageUrl: 'https://api.sitesails.com/public/',
+      memberId: 11,
+      memberFirstName: 'Karlo',
+      memberLastName: 'Marinović',
+      memberAvatarUrl: null,
+      createdAt: '01/21/2021 19:28:36',
+      data: {},
+      contents: null,
+    };
+    const expectedConnectionKeys = Object.keys(expectedConnectionResponse);
 
-  //   expect(resKeys).toEqual(expectedConnectionKeys);
-  // });
+    const { token } = await ss
+      .members()
+      .login({ email: userData.email, password: userData.password });
+    const res = await ss.connections(connection).add({
+      memberToken: token,
+      nodeId: productId,
+    });
+    const resKeys = Object.keys(res);
+
+    expect(resKeys).toEqual(expectedConnectionKeys);
+  });
   it('should place connection type to a node response when connection added', async () => {
-    // const slug = 'football';
-    // const nodes = 'products';
+    const expectedResponse = ['likes'];
+    const { token } = await ss
+      .members()
+      .login({ email: userData.email, password: userData.password });
 
-    // const { token } = await ss
-    //   .members()
-    //   .login({ email: userData.email, password: userData.password });
+    await ss.connections(connection).remove({
+      memberToken: token,
+      nodeId: productId,
+    });
+    await ss.connections(connection).add({
+      memberToken: token,
+      nodeId: productId,
+    });
 
-    // await ss.connections(connection).remove({
-    //   memberToken: token,
-    //   nodeId: productId,
-    // });
+    const { connectionStats, connections } = await ss
+      .nodes(nodes)
+      .get(slug, { connections: 'likes', connectionStats: 'likes' });
+    const connectionsKeys = Object.keys(connections);
+    const connectionStatsKeys = Object.keys(connectionStats);
 
-    // await ss.connections(connection).add({
-    //   memberToken: token,
-    //   nodeId: productId,
-    //   data: { isLiked: true },
-    // });
+    // TODO THIS DOES NOT ALWAYS PASS // CONNECTION DOES NOT SEEM TO BE ALWAYS ADDED, OR MULTIPLE ARE ADDED // NEED LOOK INTO
+    expect(connectionsKeys).toEqual(expectedResponse);
+    expect(connectionStatsKeys).toEqual(expectedResponse);
+  });
 
-    // FETCH A NODE
-    // const res = await ss.nodes(nodes).get(slug);
-    // console.log('product res', res);
-    // expect(data.title).toEqual('Football');
-    // ASSERT THAT A NODE HAS VALID CONNECTION PROPERTIES
+  it('should remove connection type from a node when connection removed', async () => {
+    const expectedConnectionStatsResponse = { likes: { count: 0 } };
+    const expectedConnectionsResponse = {};
+    const { token } = await ss
+      .members()
+      .login({ email: userData.email, password: userData.password });
 
-    // SEARCH CONNECTIONS
-    const resConnectionSearch = await ss
-      .connections(connection)
-      .search({ node: 'football' });
-    console.log('response', resConnectionSearch);
+    await ss.connections(connection).add({
+      memberToken: token,
+      nodeId: productId,
+    });
 
-    // FETCH A NODE
-    const res = await ss
-      .nodes('products')
-      .get('football', { connections: 'likes' });
-    console.log('product res', res.connections);
+    await ss.connections(connection).remove({
+      memberToken: token,
+      nodeId: productId,
+    });
+
+    const { connectionStats, connections } = await ss
+      .nodes(nodes)
+      .get(slug, { connections: 'likes', connectionStats: 'likes' });
+
+    expect(connectionStats).toEqual(expectedConnectionStatsResponse);
+    expect(connections).toEqual(expectedConnectionsResponse);
   });
 });

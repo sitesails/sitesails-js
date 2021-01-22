@@ -10,7 +10,7 @@ export const ss = new SiteSails({
   // adminApiKey: '66461de9-b081-43ed-87c4-7fa098829251',
   publicApiKey: '66461de9-b081-43ed-87c4-7fa098829251',
   // publicApiKey: null,
-  debug: true,
+  // debug: true,
 });
 
 // TODO DELETE HELPER FUNCTIONS
