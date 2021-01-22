@@ -9,6 +9,7 @@ const userData = {
 
 describe('Api nodes', () => {
   const nodes = 'products';
+  const productSlug = 'football';
 
   it('should all be fetched correctly', async () => {
     const nodes = 'products';
@@ -20,29 +21,29 @@ describe('Api nodes', () => {
   it('should be fetched only from a specified node category', async () => {
     const category = 'sport';
     const { data } = await ss.nodes(nodes).search({ category });
+
     expect(data).toHaveLength(2);
   });
   it('should fetch only in specified language', async () => {
     const lang = 'hr';
     const { data } = await ss.nodes(nodes).search({ lang });
+
     expect(data[0].languageId).toEqual(lang);
   });
 
   it('should fetch a specified node', async () => {
-    const slug = 'football';
-    const { data } = await ss.nodes(nodes).get(slug);
+    const { data } = await ss.nodes(nodes).get(productSlug);
     expect(data.title).toEqual('Football');
   });
 
   it('should fetch a specified node in specified language', async () => {
-    const slug = 'football';
     const lang = 'hr';
-    const { data } = await ss.nodes(nodes).get(slug, { lang });
+    const { data } = await ss.nodes(nodes).get(productSlug, { lang });
+
     expect(data.title).toEqual('Nogometna lopta');
   });
 
   it('should be of specific shape when a node is fetched', async () => {
-    const slug = 'football';
     const expectedProduct = {
       id: 2856,
       slug: 'football',
@@ -74,24 +75,83 @@ describe('Api nodes', () => {
       subsections: null,
     };
 
-    const node = await ss.nodes(nodes).get(slug);
-    expect(node).toEqual(expectedProduct);
+    const expectedProductKeys = Object.keys(expectedProduct);
+
+    const res = await ss.nodes(nodes).get(productSlug);
+    const resKeys = Object.keys(res);
+
+    expect(resKeys).toEqual(expectedProductKeys);
+  });
+
+  it('should fetch a node with English translations when English language specified', async () => {
+    const expectedResponse = {
+      author: 'Karlo M',
+      title: 'Football',
+      description: 'A beautiful ball',
+      text: '<p>Go out and play football. </p>',
+      whatIsIt: 'sports item',
+      modelNumber: '3',
+      recommended: false,
+    };
+    // NOT SURE WHICH IS THE DEFAULT LANGUAGE, SO SPECIFYING ENGLISH EXPLICITLY
+    const lang = 'en';
+
+    const { data } = await ss.nodes(nodes).get(productSlug, { lang });
+
+    expect(data).toEqual(expectedResponse);
+  });
+
+  it('should fetch a node with Croatian translations when Croatian language specified', async () => {
+    const expectedResponse = {
+      author: 'Karlo M',
+      title: 'Nogometna lopta',
+      description: 'Prekrasna lopta',
+      text: '<p>Igrajte nogomet</p>',
+      whatIsIt: 'sportski rekvizit',
+      modelNumber: '3',
+      recommended: false,
+    };
+    const lang = 'hr';
+
+    const { data } = await ss.nodes(nodes).get(productSlug, { lang });
+
+    expect(data).toEqual(expectedResponse);
+  });
+
+  it('should fetch a node with Italian translations when Italian language specified', async () => {
+    const expectedResponse = {
+      author: 'Karlo M',
+      title: 'Football in Italian',
+      description: 'A beautiful ball in Italian language',
+      text: '<p>Esci e gioca a calcio.</p>',
+      whatIsIt: 'sports item in italian',
+      modelNumber: '3',
+      recommended: false,
+    };
+    const lang = 'it';
+
+    const { data } = await ss.nodes(nodes).get(productSlug, { lang });
+
+    expect(data).toEqual(expectedResponse);
   });
 
   it('categories should all be fetched correctly', async () => {
     const { data } = await ss.nodes(nodes).categories({});
+
     expect(data).toHaveLength(2);
   });
 
   it('categories should all be fetched correctly in specified language', async () => {
     const lang = 'hr';
     const { data } = await ss.nodes(nodes).categories({ lang });
+
     expect(data[0].languageId).toEqual(lang);
   });
 
   it('category should be fetched correctly', async () => {
     const category = 'food';
     const { data } = await ss.nodes(nodes).category(category);
+
     expect(data.name).toEqual(category);
   });
 
@@ -99,6 +159,7 @@ describe('Api nodes', () => {
     const category = 'food';
     const lang = 'hr';
     const { data } = await ss.nodes(nodes).category(category, { lang });
+
     expect(data.name).toEqual('hrana');
   });
 
@@ -142,7 +203,7 @@ describe('Api nodes', () => {
 
 describe('Api members', () => {
   // it('should register new user correctly', async () => {
-  // TODO ADD DYNAMIC EMAIL SO NO EMAIL CONFLICT
+  // TODO ADD DYNAMIC EMAIL SO NO EMAIL CONFLICT // ADD ASSERTION
   // const res = await ss.members().register({
   //   email: 'karlo.marinovic@init.hr',
   //   firstName: 'Karlo',
@@ -166,6 +227,7 @@ describe('Api members', () => {
       .members()
       .login({ email: userData.email, password: userData.password });
     const resKeys = Object.keys(res);
+
     expect(resKeys).toEqual(expectedKeys);
   });
 });
@@ -252,6 +314,7 @@ describe('Api connections', () => {
       .nodes(nodes)
       .get(slug, { connections: 'likes', connectionStats: 'likes' });
 
+    // TODO THIS DOES NOT ALWAYS PASS // CONNECTION DOES NOT SEEM TO BE ALWAYS ADDED, OR MULTIPLE ARE ADDED // NEED LOOK INTO
     expect(connectionStats).toEqual(expectedConnectionStatsResponse);
     expect(connections).toEqual(expectedConnectionsResponse);
   });
