@@ -219,6 +219,7 @@ describe('Api members', () => {
   // });
   // console.log('res', res);
   // });
+
   it('should login existing user corectly', async () => {
     const expectedLoginResponse = {
       id: 0,
@@ -244,6 +245,15 @@ describe('Api connections', () => {
   const productId = 2856;
   const slug = 'football';
   const nodes = 'products';
+  let defaultToken = null;
+
+  beforeAll(async () => {
+    const { token } = await ss
+      .members()
+      .login({ email: userData.email, password: userData.password });
+
+    defaultToken = token;
+  });
 
   it('should return a correct response after adding a connection to a node', async () => {
     const expectedConnectionResponse = {
@@ -262,11 +272,9 @@ describe('Api connections', () => {
       contents: null,
     };
     const expectedConnectionKeys = Object.keys(expectedConnectionResponse);
-    const { token } = await ss
-      .members()
-      .login({ email: userData.email, password: userData.password });
+
     const res = await ss.connections(connection).add({
-      memberToken: token,
+      memberToken: defaultToken,
       nodeId: productId,
     });
     const resKeys = Object.keys(res);
@@ -275,15 +283,12 @@ describe('Api connections', () => {
   it('should place connection type to a node response when connection added', async () => {
     // const expectedConnectionStatsResponse = { likes: { count: 1 } };
     // const expectedConnectionsResponse = ['likes'];
-    // const { token } = await ss
-    //   .members()
-    //   .login({ email: userData.email, password: userData.password });
     // await ss.connections(connection).remove({
-    //   memberToken: token,
+    //   memberToken: defaultToken,
     //   nodeId: productId,
     // });
     // await ss.connections(connection).add({
-    //   memberToken: token,
+    //   memberToken: defaultToken,
     //   nodeId: productId,
     // });
     // const { connectionStats, connections } = await ss
@@ -298,18 +303,15 @@ describe('Api connections', () => {
   it('should remove connection type from a node when connection removed', async () => {
     const expectedConnectionStatsResponse = { likes: { count: 0 } };
     const expectedConnectionsResponse = {};
-    const { token } = await ss
-      .members()
-      .login({ email: userData.email, password: userData.password });
 
     await ss.connections(connection).add({
-      memberToken: token,
+      memberToken: defaultToken,
       nodeId: productId,
     });
 
     // TODO IT WOULD BE GOOD IF THERE WAS A RESPONSE HERE FOR REMOVE CONNECTION
     await ss.connections(connection).remove({
-      memberToken: token,
+      memberToken: defaultToken,
       nodeId: productId,
     });
 
@@ -324,7 +326,7 @@ describe('Api connections', () => {
   });
 });
 
-describe('App collections', () => {
+describe('Api collections', () => {
   const section = 'products';
   const collection = 'featured';
   const collectionListId = 2887;
@@ -387,8 +389,6 @@ describe('App collections', () => {
       .collections(section, collection)
       .get(collectionListId, { lang });
 
-    console.log('here is the specified en language ', data);
-
     expect(data).toEqual(expectedResponse);
   });
 
@@ -409,7 +409,7 @@ describe('App collections', () => {
   });
 });
 
-// describe('App notifications', () => {
+// describe('Api notifications', () => {
 //   it('should send a notification correctly', async () => {
 //     await ss
 //       .notifications()
