@@ -219,7 +219,10 @@ describe('Api members', () => {
   // });
   // console.log('res', res);
   // });
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9697799310f22736934e1ef30254cce1c7c00fe0
   it('should login existing user corectly', async () => {
     const expectedLoginResponse = {
       id: 0,
@@ -245,6 +248,7 @@ describe('Api connections', () => {
   const productId = 2856;
   const slug = 'football';
   const nodes = 'products';
+<<<<<<< HEAD
   let defaultToken = null;
 
   beforeAll(async () => {
@@ -254,6 +258,8 @@ describe('Api connections', () => {
 
     defaultToken = token;
   });
+=======
+>>>>>>> 9697799310f22736934e1ef30254cce1c7c00fe0
 
   it('should return a correct response after adding a connection to a node', async () => {
     const expectedConnectionResponse = {
@@ -272,9 +278,17 @@ describe('Api connections', () => {
       contents: null,
     };
     const expectedConnectionKeys = Object.keys(expectedConnectionResponse);
+<<<<<<< HEAD
 
     const res = await ss.connections(connection).add({
       memberToken: defaultToken,
+=======
+    const { token } = await ss
+      .members()
+      .login({ email: userData.email, password: userData.password });
+    const res = await ss.connections(connection).add({
+      memberToken: token,
+>>>>>>> 9697799310f22736934e1ef30254cce1c7c00fe0
       nodeId: productId,
     });
     const resKeys = Object.keys(res);
@@ -283,12 +297,24 @@ describe('Api connections', () => {
   it('should place connection type to a node response when connection added', async () => {
     // const expectedConnectionStatsResponse = { likes: { count: 1 } };
     // const expectedConnectionsResponse = ['likes'];
+<<<<<<< HEAD
     // await ss.connections(connection).remove({
     //   memberToken: defaultToken,
     //   nodeId: productId,
     // });
     // await ss.connections(connection).add({
     //   memberToken: defaultToken,
+=======
+    // const { token } = await ss
+    //   .members()
+    //   .login({ email: userData.email, password: userData.password });
+    // await ss.connections(connection).remove({
+    //   memberToken: token,
+    //   nodeId: productId,
+    // });
+    // await ss.connections(connection).add({
+    //   memberToken: token,
+>>>>>>> 9697799310f22736934e1ef30254cce1c7c00fe0
     //   nodeId: productId,
     // });
     // const { connectionStats, connections } = await ss
@@ -303,15 +329,28 @@ describe('Api connections', () => {
   it('should remove connection type from a node when connection removed', async () => {
     const expectedConnectionStatsResponse = { likes: { count: 0 } };
     const expectedConnectionsResponse = {};
+<<<<<<< HEAD
 
     await ss.connections(connection).add({
       memberToken: defaultToken,
+=======
+    const { token } = await ss
+      .members()
+      .login({ email: userData.email, password: userData.password });
+
+    await ss.connections(connection).add({
+      memberToken: token,
+>>>>>>> 9697799310f22736934e1ef30254cce1c7c00fe0
       nodeId: productId,
     });
 
     // TODO IT WOULD BE GOOD IF THERE WAS A RESPONSE HERE FOR REMOVE CONNECTION
     await ss.connections(connection).remove({
+<<<<<<< HEAD
       memberToken: defaultToken,
+=======
+      memberToken: token,
+>>>>>>> 9697799310f22736934e1ef30254cce1c7c00fe0
       nodeId: productId,
     });
 
@@ -326,7 +365,11 @@ describe('Api connections', () => {
   });
 });
 
+<<<<<<< HEAD
 describe('Api collections', () => {
+=======
+describe('App collections', () => {
+>>>>>>> 9697799310f22736934e1ef30254cce1c7c00fe0
   const section = 'products';
   const collection = 'featured';
   const collectionListId = 2887;
@@ -389,6 +432,11 @@ describe('Api collections', () => {
       .collections(section, collection)
       .get(collectionListId, { lang });
 
+<<<<<<< HEAD
+=======
+    console.log('here is the specified en language ', data);
+
+>>>>>>> 9697799310f22736934e1ef30254cce1c7c00fe0
     expect(data).toEqual(expectedResponse);
   });
 
@@ -409,7 +457,11 @@ describe('Api collections', () => {
   });
 });
 
+<<<<<<< HEAD
 // describe('Api notifications', () => {
+=======
+// describe('App notifications', () => {
+>>>>>>> 9697799310f22736934e1ef30254cce1c7c00fe0
 //   it('should send a notification correctly', async () => {
 //     await ss
 //       .notifications()
