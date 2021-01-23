@@ -8,6 +8,7 @@ import SiteSailsMailChimpIntegration from '../integrations/mailchimp';
 
 import { Configuration, FetchOptions } from './types';
 import { siteSailsFetch } from './utils';
+import SiteSailsKeyValueManager from 'keyvalues';
 
 const DEFAULT_API_URL = 'https://api.sitesails.com/api/v1';
 
@@ -49,4 +50,9 @@ export default class SiteSailsClient {
     mailchimp: new SiteSailsMailChimpIntegration(this),
     stripe: new SiteSailsStripeIntegration(this),
   };
+
+  // TODO ADDING KEYVALUE STORE MODULE
+  keyvalues(store: string) {
+    return new SiteSailsKeyValueManager(this, store);
+  }
 }

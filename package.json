@@ -11,7 +11,8 @@
     "lib": "lib"
   },
   "scripts": {
-    "build": "rm -rf lib/ && tsc --declaration"
+    "build": "rm -rf lib/ && tsc --declaration",
+    "test:keyvalue": "jest --watch src/keyvalues"
   },
   "repository": {
     "type": "git",
