@@ -51,7 +51,6 @@ export default class SiteSailsClient {
     stripe: new SiteSailsStripeIntegration(this),
   };
 
-  // TODO ADDING KEYVALUE STORE MODULE
   keyvalues(store: string) {
     return new SiteSailsKeyValueManager(this, store);
   }

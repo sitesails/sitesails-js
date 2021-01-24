@@ -203,7 +203,7 @@ describe('KeyValue delete method', () => {
     const { data: allKeyValuesResponse } = await ss.keyvalues(store).search();
 
     allKeyValuesResponse.forEach((keyValue) => {
-      expect(keyValue).not.toMatchObject(deletedKeyValue);
+      expect(keyValue.key).not.toBe('two');
     });
   });
 });
