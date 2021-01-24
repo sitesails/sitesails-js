@@ -1,4 +1,6 @@
+import { toMatchShapeOf } from 'jest-to-match-shape-of';
 import SiteSailsClient from '../client';
+import { KeyValue, KeyValueSearchResult } from './types';
 
 const ss = new SiteSailsClient({
   apiUrl: 'https://api.sitesails.com/api/v1',
@@ -12,23 +14,51 @@ const store = 'redirect';
 // TODO WILL NEED ADMIN KEY HERE
 // TODO BEFORE GET ADMIN KEY, USE UI ADMIN TOKEN IN EACH REQUEST
 
+expect.extend({
+  toMatchShapeOf,
+});
+
 describe('KeyValues search method', () => {
-  // TODO REMOVE THIS ONE
-  // it('should return something', async () => {
-  //   const res = await ss.keyvalues('redirect').testAllStores();
-  //   console.log('res here', res);
-  // });
-  // TODO TEST SEARCH
-  // SEARCH ALL
   it('should return all keyvalue pairs from the specified store', async () => {
+    const { data } = await ss.keyvalues(store).search();
+
+    expect(data).toHaveLength(3);
+  });
+
+  it('should return response that matches the default search result type', async () => {
+    const expectedResponseShape: KeyValueSearchResult<KeyValue> = {
+      data: [
+        {
+          key: 'one',
+          value: 'less',
+        },
+      ],
+      meta: { pageNumber: 1, pageSize: 20, totalRows: 3, totalPages: 1 },
+    };
+
     const res = await ss.keyvalues(store).search();
 
-    console.log('res', res);
-
-    expect(res).match;
+    expect(res).toMatchShapeOf(expectedResponseShape);
   });
-  // SEARCH RESULTS COME IN SPECIFIC SHAPE AS PER TYPE
+
   // SEARCH RESULTS COME TRANSFORMED AS PER SPECIFIED TYPE
+  it('should return response that matches transformed type when transform function is provided', async () => {
+    type TransformedKeyValueTuple = [key: string, value: string];
+    const expectedTransformedShape: KeyValueSearchResult<TransformedKeyValueTuple> = {
+      data: [['one', 'less']],
+      meta: { pageNumber: 1, pageSize: 20, totalRows: 3, totalPages: 1 },
+    };
+    const transformFunction = (
+      response: KeyValue,
+    ): TransformedKeyValueTuple => {
+      return [response.key, response.value];
+    };
+
+    const res = await ss.keyvalues(store).search(null, transformFunction);
+
+    expect(res).toMatchShapeOf(expectedTransformedShape);
+  });
+
   // need to specify return type on the method
   // SEARCH PER PAGE
   // SEARH PAGE NR
