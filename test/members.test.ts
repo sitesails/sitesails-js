@@ -1,4 +1,5 @@
-import { ss, memberData } from '../tests/setup';
+import { ss, memberData } from './api-setup';
+import { loginResponseShape } from './fixtures';
 
 describe('Members', () => {
   // it('should register new user correctly', async () => {
@@ -12,21 +13,11 @@ describe('Members', () => {
   // console.log('res', res);
   // });
   it('should login existing user corectly', async () => {
-    const expectedLoginResponse = {
-      id: 0,
-      token: '',
-      email: '',
-      firstName: '',
-      lastName: '',
-      avatarUrl: null,
-      hasNotificationConsent: true,
-    };
-    const expectedKeys = Object.keys(expectedLoginResponse);
     const res = await ss
       .members()
       .login({ email: memberData.email, password: memberData.password });
-    const resKeys = Object.keys(res);
+    // const resKeys = Object.keys(res);
 
-    expect(resKeys).toEqual(expectedKeys);
+    expect(res).toMatchShapeOf(loginResponseShape);
   });
 });

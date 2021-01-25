@@ -1,4 +1,4 @@
-import SiteSails from '../index';
+import SiteSails from '../src';
 
 export const ss = new SiteSails({
   apiUrl: 'https://api.sitesails.com/api/v1',

@@ -12,6 +12,15 @@
     "esModuleInterop": true,
     "typeRoots": ["./node_modules/@types/"]
   },
-  "include": ["src/**/*.ts", "src/tests/api.test.js"],
+
+  "include": [
+    "src/**/*.ts",
+    "src/tests/api.test.js",
+    "test/collections.test.ts",
+    "test/connections.test.ts",
+    "test/setupTest.ts",
+    "test/keyvalues.test.ts",
+    "test/members.test.ts"
+  ],
   "exclude": ["node_modules"]
 }

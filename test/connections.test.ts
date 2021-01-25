@@ -1,4 +1,6 @@
-import { ss, memberData } from '../tests/setup';
+import { ss, memberData } from './api-setup';
+import { connectionShape } from './fixtures';
+import { stripForTest } from './utils';
 
 describe('Connections', () => {
   const connection = 'likes';
@@ -7,22 +9,6 @@ describe('Connections', () => {
   const nodes = 'products';
 
   it('should return a correct response after adding a connection to a node', async () => {
-    const expectedConnectionResponse = {
-      id: 67,
-      parentId: null,
-      nodeId: 2856,
-      nodeName: 'Football',
-      nodeSlug: 'football',
-      nodeImageUrl: 'https://api.sitesails.com/public/',
-      memberId: 11,
-      memberFirstName: 'Karlo',
-      memberLastName: 'Marinović',
-      memberAvatarUrl: null,
-      createdAt: '01/21/2021 19:28:36',
-      data: {},
-      contents: null,
-    };
-    const expectedConnectionKeys = Object.keys(expectedConnectionResponse);
     const { token } = await ss
       .members()
       .login({ email: memberData.email, password: memberData.password });
@@ -30,11 +16,12 @@ describe('Connections', () => {
       memberToken: token,
       nodeId: productId,
     });
-    const resKeys = Object.keys(res);
-    expect(resKeys).toEqual(expectedConnectionKeys);
+
+    expect(stripForTest(res)).toMatchShapeOf(connectionShape);
   });
 
   it('should place connection type to a node response when connection added', async () => {
+    // TODO COME BACK TO THIS LATER
     // const expectedConnectionStatsResponse = { likes: { count: 1 } };
     // const expectedConnectionsResponse = ['likes'];
     // const { token } = await ss

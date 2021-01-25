@@ -1,11 +1,8 @@
-import { toMatchShapeOf, toMatchOneOf } from 'jest-to-match-shape-of';
-import { ss } from '../tests/setup';
-
-import {
-  KeyValue,
-  KeyValueResponseTransformation,
-  KeyValueSearchResult,
-} from './types';
+import { ss } from './api-setup';
+import { KeyValue, KeyValueSearchResult } from '../src/keyvalues/types';
+import { TransformedKeyValueTuple, transformFunction } from './utils';
+import { toIncludeSearchStringInKeyValue } from './setupTests';
+import { keyValueSearchResponse } from './fixtures';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -16,45 +13,11 @@ declare global {
   }
 }
 
-const toIncludeSearchStringInKeyValue: jest.CustomMatcher = (
-  received: KeyValue,
-  expected: string,
-) => {
-  if (typeof expected !== 'string') {
-    throw new Error('Expected searchString to be a string!');
-  }
-
-  if (received.key.includes(expected) || received.value.includes(expected))
-    return {
-      pass: true,
-      message: () => `Search results expected to contain '${expected}'`,
-    };
-
-  return {
-    pass: false,
-    message: () => `Search results expected to contain '${expected}':
-    result:
-    {
-      key: ${received.key}
-      value: ${received.value}
-    }
-    `,
-  };
-};
-
 expect.extend({
-  toMatchShapeOf,
-  toMatchOneOf,
   toIncludeSearchStringInKeyValue,
 });
 
 const store = 'redirect';
-type TransformedKeyValueTuple = [key: string, value: string];
-const transformFunction: KeyValueResponseTransformation<TransformedKeyValueTuple> = (
-  response,
-) => {
-  return [response.key, response.value];
-};
 
 describe('KeyValues search method', () => {
   it('should return all keyvalue pairs from the specified store', async () => {
@@ -64,19 +27,9 @@ describe('KeyValues search method', () => {
   });
 
   it('should return response that matches the default search result type', async () => {
-    const expectedResponseShape: KeyValueSearchResult<KeyValue> = {
-      data: [
-        {
-          key: 'one',
-          value: 'less',
-        },
-      ],
-      meta: { pageNumber: 1, pageSize: 20, totalRows: 3, totalPages: 1 },
-    };
-
     const res = await ss.keyvalues(store).search();
 
-    expect(res).toMatchShapeOf(expectedResponseShape);
+    expect(res).toMatchShapeOf(keyValueSearchResponse);
   });
 
   it('should return response that matches transformed type when transform function is provided', async () => {
