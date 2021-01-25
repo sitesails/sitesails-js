@@ -1,5 +1,9 @@
 import { toMatchShapeOf } from 'jest-to-match-shape-of';
+import dotenv from 'dotenv';
+
 import { KeyValue } from '../src/keyvalues/types';
+
+dotenv.config();
 
 export const toIncludeSearchStringInKeyValue: jest.CustomMatcher = (
   received: KeyValue,

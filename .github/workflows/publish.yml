@@ -16,7 +16,7 @@ jobs:
           registry-url: "https://registry.npmjs.org"
       - run: yarn
       - run: yarn build
-      - run: yarn test:ci
+      - run: SITESAILS_API_URL=${{ secrets.SITESAILS_API_URL }} SITESAILS_API_PUBLIC_KEY=${{ secrets.SITESAILS_API_PUBLIC_KEY }} SITESAILS_API_ADMIN_KEY=${{ secrets.SITESAILS_API_ADMIN_KEY }} yarn test:ci
       - run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
