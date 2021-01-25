@@ -46,28 +46,28 @@ describe('Nodes', () => {
   it('should be of specific shape when a node is fetched', async () => {
     const res = await ss.nodes(nodes).get(productSlug);
 
-    expect(stripForTest(res)).toMatchShapeOf(footballShapeEn);
+    expect(stripForTest(res)).toEqual(footballShapeEn);
   });
 
   it('should fetch a node with English translations when English language specified', async () => {
     const lang = 'en';
     const { data } = await ss.nodes(nodes).get(productSlug, { lang });
 
-    expect(data).toMatchShapeOf(footballDataShapeEn);
+    expect(data).toEqual(footballDataShapeEn);
   });
 
   it('should fetch a node with Croatian translations when Croatian language specified', async () => {
     const lang = 'hr';
     const { data } = await ss.nodes(nodes).get(productSlug, { lang });
 
-    expect(data).toMatchShapeOf(footballDataShapeHr);
+    expect(data).toEqual(footballDataShapeHr);
   });
 
   it('should fetch a node with default English translations when unused language specified', async () => {
     const lang = 'pt';
     const { data } = await ss.nodes(nodes).get(productSlug, { lang });
 
-    expect(data).toMatchShapeOf(footballDataShapeEn);
+    expect(data).toEqual(footballDataShapeEn);
   });
 
   it('categories should all be fetched correctly', async () => {
@@ -86,7 +86,7 @@ describe('Nodes', () => {
   it('category should be fetched correctly', async () => {
     const { data } = await ss.nodes(nodes).category(category);
 
-    expect(data.name).toMatchShapeOf(category);
+    expect(data.name).toBe(category);
   });
 
   it('category should be fetched in specified language', async () => {

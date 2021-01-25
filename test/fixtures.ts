@@ -1,5 +1,3 @@
-import { KeyValue, KeyValueSearchResult } from 'keyvalues/types';
-
 // NODES
 export const footballShapeEn = {
   id: 2856,
@@ -154,12 +152,38 @@ export const loginResponseShape = {
 
 // KEYVALUES
 
-export const keyValueSearchResponse: KeyValueSearchResult<KeyValue> = {
+export const keyValueSearchResponseShape = {
   data: [
     {
-      key: 'one',
-      value: 'less',
+      id: 282,
+      keyvalueStoreId: 4,
+      key: 'test',
+      value: 'test-target',
+      userCreatedId: 1,
+      userCreated: null,
+      userUpdatedId: 1,
+      userUpdated: null,
     },
   ],
   meta: { pageNumber: 1, pageSize: 20, totalRows: 3, totalPages: 1 },
+};
+
+export const keyValueSearchTransformedShape = {
+  data: [
+    ['test', 'test-target'],
+    ['another', 'another-one'],
+    ['one', 'more'],
+  ],
+  meta: { pageNumber: 1, pageSize: 20, totalRows: 3, totalPages: 1 },
+};
+
+export const keyValueGetResponse = {
+  id: 0,
+  keyvalueStoreId: 0,
+  key: 'another',
+  value: 'another-one',
+  userCreatedId: 1,
+  userCreated: null,
+  userUpdatedId: 1,
+  userUpdated: null,
 };

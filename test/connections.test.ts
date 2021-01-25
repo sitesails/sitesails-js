@@ -17,7 +17,9 @@ describe('Connections', () => {
       nodeId: productId,
     });
 
-    expect(stripForTest(res)).toMatchShapeOf(connectionShape);
+    expect(Object.keys(stripForTest(res))).toEqual(
+      Object.keys(connectionShape),
+    );
   });
 
   it('should place connection type to a node response when connection added', async () => {

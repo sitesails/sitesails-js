@@ -17,8 +17,8 @@ describe('Collections', () => {
       .search({});
     const responseSingleCollection = arrayHoldingAllCollectionLists[0];
 
-    expect(stripForTest(stripForTest(responseSingleCollection))).toMatchShapeOf(
-      collectionShape,
+    expect(Object.keys(stripForTest(responseSingleCollection))).toEqual(
+      Object.keys(collectionShape),
     );
     expect(arrayHoldingAllCollectionLists).toHaveLength(1);
   });

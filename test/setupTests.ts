@@ -1,5 +1,13 @@
-import { toMatchShapeOf } from 'jest-to-match-shape-of';
 import { KeyValue } from '../src/keyvalues/types';
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace jest {
+    interface Matchers<R> {
+      toIncludeSearchStringInKeyValue(expected: string): R;
+    }
+  }
+}
 
 export const toIncludeSearchStringInKeyValue: jest.CustomMatcher = (
   received: KeyValue,
@@ -28,5 +36,5 @@ export const toIncludeSearchStringInKeyValue: jest.CustomMatcher = (
 };
 
 expect.extend({
-  toMatchShapeOf,
+  toIncludeSearchStringInKeyValue,
 });

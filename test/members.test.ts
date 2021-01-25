@@ -11,13 +11,12 @@ describe('Members', () => {
   //   password: 'matrixmatrix',
   // });
   // console.log('res', res);
-  // });
+  // // });
   it('should login existing user corectly', async () => {
     const res = await ss
       .members()
       .login({ email: memberData.email, password: memberData.password });
     // const resKeys = Object.keys(res);
-
-    expect(res).toMatchShapeOf(loginResponseShape);
+    expect(Object.keys(res)).toEqual(Object.keys(loginResponseShape));
   });
 });

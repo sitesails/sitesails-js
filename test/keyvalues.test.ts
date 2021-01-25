@@ -1,21 +1,15 @@
 import { ss } from './api-setup';
-import { KeyValue, KeyValueSearchResult } from '../src/keyvalues/types';
-import { TransformedKeyValueTuple, transformFunction } from './utils';
-import { toIncludeSearchStringInKeyValue } from './setupTests';
-import { keyValueSearchResponse } from './fixtures';
-
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace jest {
-    interface Matchers<R> {
-      toIncludeSearchStringInKeyValue(expected: string): R;
-    }
-  }
-}
-
-expect.extend({
-  toIncludeSearchStringInKeyValue,
-});
+import { KeyValue } from '../src/keyvalues/types';
+import {
+  stripForTest,
+  TransformedKeyValueTuple,
+  transformFunction,
+} from './utils';
+import {
+  keyValueGetResponse,
+  keyValueSearchResponseShape,
+  keyValueSearchTransformedShape,
+} from './fixtures';
 
 const store = 'redirect';
 
@@ -26,23 +20,21 @@ describe('KeyValues search method', () => {
     expect(data).toHaveLength(3);
   });
 
-  it('should return response that matches the default search result type', async () => {
+  it('should return response that with correct shape', async () => {
     const res = await ss.keyvalues(store).search();
 
-    expect(res).toMatchShapeOf(keyValueSearchResponse);
+    expect(stripForTest(res.data[0])).toEqual(
+      keyValueSearchResponseShape.data[0],
+    );
+    expect(stripForTest(res.meta)).toEqual(keyValueSearchResponseShape.meta);
   });
 
   it('should return response that matches transformed type when transform function is provided', async () => {
-    const expectedTransformedShape: KeyValueSearchResult<TransformedKeyValueTuple> = {
-      data: [['one', 'less']],
-      meta: { pageNumber: 1, pageSize: 20, totalRows: 3, totalPages: 1 },
-    };
-
     const res = await ss
       .keyvalues(store)
       .search<TransformedKeyValueTuple>(null, transformFunction);
 
-    expect(res).toMatchShapeOf(expectedTransformedShape);
+    expect(res).toEqual(keyValueSearchTransformedShape);
   });
 
   it('should return specified number of results per page', async () => {
@@ -74,6 +66,8 @@ describe('KeyValues search method', () => {
       .search({ search: expectedSearchString });
 
     data.forEach((result) => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       expect(result).toIncludeSearchStringInKeyValue(expectedSearchString);
     });
   });
@@ -94,7 +88,9 @@ describe('KeyValue get method', () => {
   it('should return an object of correct shape', async () => {
     const res = await ss.keyvalues(store).get(expectedKeyValueObject.key);
 
-    expect(res).toMatchShapeOf(expectedKeyValueObject);
+    expect(Object.keys(stripForTest(res))).toEqual(
+      Object.keys(keyValueGetResponse),
+    );
   });
 
   it('should return a correctly transformed response when transform function is provided ', async () => {
