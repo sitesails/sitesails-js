@@ -1,0 +1,26 @@
+name: Build and test module
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      SITESAILS_API_URL: ${{ secrets.SITESAILS_API_URL_NEXT }}
+      SITESAILS_API_PUBLIC_KEY: ${{ secrets.SITESAILS_API_PUBLIC_KEY }}
+      SITESAILS_API_ADMIN_KEY: ${{ secrets.SITESAILS_API_ADMIN_KEY }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "12.x"
+          registry-url: "https://registry.npmjs.org"
+      - run: yarn
+      - run: yarn build
+      - run: yarn test:ci

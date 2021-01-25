@@ -1,0 +1,27 @@
+name: Publish NPM module
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    env:
+      SITESAILS_API_URL: ${{ secrets.SITESAILS_API_URL }}
+      SITESAILS_API_PUBLIC_KEY: ${{ secrets.SITESAILS_API_PUBLIC_KEY }}
+      SITESAILS_API_ADMIN_KEY: ${{ secrets.SITESAILS_API_ADMIN_KEY }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "12.x"
+          registry-url: "https://registry.npmjs.org"
+      - run: yarn
+      - run: yarn build
+      - run: yarn test:ci
+      - run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
