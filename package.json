@@ -1,6 +1,6 @@
 {
   "name": "sitesails",
-  "version": "0.9.23",
+  "version": "0.9.24",
   "description": "Javascript library for the SiteSails API.",
   "author": "SiteSails <support@sitesails.com>",
   "license": "MIT",
@@ -8,7 +8,8 @@
   "types": "lib/index.d.ts",
   "directories": {
     "src": "src",
-    "lib": "lib"
+    "lib": "lib",
+    "test": "test"
   },
   "scripts": {
     "test": "jest --watch",
