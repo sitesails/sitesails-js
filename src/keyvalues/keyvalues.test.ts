@@ -23,8 +23,6 @@ const ss = new SiteSailsClient({
   // debug: true,
 });
 
-// TODO WILL NEED ADMIN KEY HERE INSTEAD OF USING TOKEN IN METHODS
-
 const toIncludeSearchStringInKeyValue: jest.CustomMatcher = (
   received: KeyValue,
   expected: string,
