@@ -1,4 +1,4 @@
-import { ss, memberData } from './setup';
+import { ss, memberData } from '../tests/setup';
 
 describe('Connections', () => {
   const connection = 'likes';

@@ -1,13 +1,9 @@
 module.exports = {
-<<<<<<< HEAD
   roots: ['./src'],
   testMatch: ['**/__tests__/**/*.+(ts|js)', '**/?(*.)+(spec|test).+(ts|js)'],
   transform: {
     '^.+\\.(ts)$': 'ts-jest',
   },
-};
-=======
   preset: 'ts-jest',
   testEnvironment: 'node',
 };
->>>>>>> @{-1}

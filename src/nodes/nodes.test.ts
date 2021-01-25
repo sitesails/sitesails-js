@@ -1,6 +1,6 @@
-import { ss } from './setup';
-import { footballEn } from './fixtures';
-import { stripForTest } from './utils';
+import { ss } from '../tests/setup';
+import { footballEn } from '../tests/fixtures';
+import { stripForTest } from '../tests/utils';
 
 describe('Nodes', () => {
   const nodes = 'products';

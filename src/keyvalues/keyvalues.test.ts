@@ -1,6 +1,6 @@
 import { toMatchShapeOf, toMatchOneOf } from 'jest-to-match-shape-of';
+import { ss } from '../tests/setup';
 
-import SiteSailsClient from '../client';
 import {
   KeyValue,
   KeyValueResponseTransformation,
@@ -15,15 +15,6 @@ declare global {
     }
   }
 }
-
-const ss = new SiteSailsClient({
-  apiUrl: 'https://api.sitesails.com/api/v1',
-  adminApiKey: 'b5ca746b-d81f-43c5-b52b-3168c13d9fa0',
-  publicApiKey: '66461de9-b081-43ed-87c4-7fa098829251',
-  // debug: true,
-});
-
-// TODO WILL NEED ADMIN KEY HERE INSTEAD OF USING TOKEN IN METHODS
 
 const toIncludeSearchStringInKeyValue: jest.CustomMatcher = (
   received: KeyValue,
@@ -42,7 +33,7 @@ const toIncludeSearchStringInKeyValue: jest.CustomMatcher = (
   return {
     pass: false,
     message: () => `Search results expected to contain '${expected}':
-    result: 
+    result:
     {
       key: ${received.key}
       value: ${received.value}

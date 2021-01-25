@@ -1,4 +1,4 @@
-import { ss } from './setup';
+import { ss } from '../tests/setup';
 
 describe('Collections', () => {
   const section = 'products';
