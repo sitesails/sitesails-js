@@ -10,6 +10,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      SITESAILS_API_URL: ${{ secrets.SITESAILS_API_URL_NEXT }}
+      SITESAILS_API_PUBLIC_KEY: ${{ secrets.SITESAILS_API_PUBLIC_KEY }}.io
+      SITESAILS_API_ADMIN_KEY: ${{ secrets.SITESAILS_API_ADMIN_KEY }}
+
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -18,4 +23,4 @@ jobs:
           registry-url: "https://registry.npmjs.org"
       - run: yarn
       - run: yarn build
-      - run: SITESAILS_API_URL=${{ secrets.SITESAILS_API_URL_NEXT }} SITESAILS_API_PUBLIC_KEY=${{ secrets.SITESAILS_API_PUBLIC_KEY }} SITESAILS_API_ADMIN_KEY=${{ secrets.SITESAILS_API_ADMIN_KEY }} yarn test:ci
+      - run: yarn test:ci
