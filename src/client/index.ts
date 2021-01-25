@@ -5,6 +5,7 @@ import SiteSailsCollectionManager from '../collections';
 import SiteSailsNotificationManager from '../notifications';
 import SiteSailsStripeIntegration from '../integrations/stripe';
 import SiteSailsMailChimpIntegration from '../integrations/mailchimp';
+import SiteSailsKeyValueManager from '../keyvalues';
 
 import { Configuration, FetchOptions } from './types';
 import { siteSailsFetch } from './utils';
@@ -49,4 +50,8 @@ export default class SiteSailsClient {
     mailchimp: new SiteSailsMailChimpIntegration(this),
     stripe: new SiteSailsStripeIntegration(this),
   };
+
+  keyvalues(store: string) {
+    return new SiteSailsKeyValueManager(this, store);
+  }
 }

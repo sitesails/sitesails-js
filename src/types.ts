@@ -12,6 +12,11 @@ export type NodeImage = {
 };
 
 export type NodeEvent = {
+  dateFrom: Date;
+  dateTo?: Date;
+  recurringWeekDay?: number;
+  recurringDay?: number;
+  weekdayOccurrence?: number;
   occurences: Date[];
 };
 
