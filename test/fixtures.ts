@@ -27,6 +27,7 @@ export const footballShapeEn = {
   connectionStats: null,
   connections: {},
   event: null,
+  product: null,
   collectionItems: null,
   subsections: null,
 };
@@ -76,6 +77,7 @@ export const categoryShape = {
   connectionStats: null,
   connections: {},
   event: null,
+  product: null,
   collectionItems: null,
   subsections: null,
 };
@@ -122,6 +124,7 @@ export const collectionShape = {
   connectionStats: null,
   connections: {},
   event: null,
+  product: null,
   collectionItems: null,
   subsections: null,
 };

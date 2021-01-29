@@ -20,6 +20,15 @@ export type NodeEvent = {
   occurences: Date[];
 };
 
+export type NodeProduct = {
+  price: number;
+  currency: string;
+  quantity: number;
+  sold: number;
+  stripeLiveId?: string;
+  stripeTestId?: string;
+};
+
 export type Node = {
   id: number;
   slug: string;
@@ -33,6 +42,7 @@ export type Node = {
   connections: any;
   connectionStats: any;
   event: NodeEvent;
+  product: NodeProduct;
 };
 
 export type ResponseMeta = {
