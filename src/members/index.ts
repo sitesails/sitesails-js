@@ -93,6 +93,19 @@ export default class SiteSailsMemberManager {
     return result;
   }
 
+  async setData(data: Record<string, any>): Promise<Record<string, any>> {
+    const result = await this.client.fetch(`/members/me/data`, null, {
+      transformation: transformMember,
+      method: 'POST',
+      body: data,
+      headers: {
+        Authorization: `Bearer ${this.memberToken}`,
+      },
+    });
+
+    return result;
+  }
+
   async updateAvatar(file: any, fileName: string) {
     const formData = new FormData();
     formData.append('file', file, { filename: fileName });
