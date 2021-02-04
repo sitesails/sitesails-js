@@ -7,9 +7,11 @@ export const footballShapeEn = {
   slugs: { it: 'italian-football', hr: 'nogometna-lopta', en: 'football' },
   sectionId: 59,
   languageId: 'en',
-  isPublished: true,
-  publishedFrom: '2021-01-21T08:58:00',
-  publishedTo: null,
+  publishable: {
+    isPublished: true,
+    publishedFrom: '2021-01-21T08:58:00',
+    publishedTo: null,
+  },
   category: { id: 2854, slug: 'sport', name: 'sport', itemCount: null },
   data: {
     author: 'Karlo M',
@@ -58,9 +60,11 @@ export const categoryShape = {
   slugs: { hr: 'sport', en: 'sport' },
   sectionId: 60,
   languageId: 'en',
-  isPublished: true,
-  publishedFrom: '2021-01-21T08:58:11.199',
-  publishedTo: null,
+  publishable: {
+    isPublished: true,
+    publishedFrom: '2021-01-21T08:58:11.199',
+    publishedTo: null,
+  },
   category: { id: null, slug: null, name: null, itemCount: 3 },
   data: {
     author: '',
@@ -107,9 +111,11 @@ export const collectionShape = {
   slugs: { hr: 'nogometna-zvijezda', en: 'fotoball-star' },
   sectionId: 67,
   languageId: 'en',
-  isPublished: true,
-  publishedFrom: '2021-01-22T09:53:00',
-  publishedTo: null,
+  publishable: {
+    isPublished: true,
+    publishedFrom: '2021-01-22T09:53:00',
+    publishedTo: null,
+  },
   category: { id: 2854, slug: 'sport', name: 'sport', itemCount: null },
   data: {
     author: 'Karlo M',

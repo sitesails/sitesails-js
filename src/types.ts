@@ -29,6 +29,12 @@ export type NodeProduct = {
   stripeTestId?: string;
 };
 
+export type NodePublishable = {
+  isPublished: boolean;
+  publishedFrom?: Date | null;
+  publishedTo?: Date | null;
+};
+
 export type Node = {
   id: number;
   slug: string;
@@ -38,7 +44,7 @@ export type Node = {
   category: NodeCategory | null;
   images: NodeImage[] | null;
   image: NodeImage | null;
-  publishedFrom: Date | null;
+  publishable?: NodePublishable;
   connections: any;
   connectionStats: any;
   event: NodeEvent;
