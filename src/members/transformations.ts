@@ -15,5 +15,6 @@ export function transformMember(response: any): Member {
     lastName: memberData.lastName,
     avatarUrl: memberData.avatarUrl,
     hasNotificationConsent: memberData.hasNotificationConsent,
+    isRegistration: response.isRegistration,
   };
 }

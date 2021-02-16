@@ -6,6 +6,7 @@ export type Member = {
   lastName: string;
   avatarUrl: string;
   hasNotificationConsent: boolean;
+  isRegistration: boolean;
 };
 
 export type MemberRegistrationParams = {
