@@ -35,6 +35,7 @@ export default class SiteSailsConnectionManager {
       method: 'POST',
       body: {
         nodeId: params.nodeId,
+        lang: params.lang,
         data: JSON.stringify(params.data),
       },
       headers: {

@@ -35,6 +35,7 @@ export type ConnectionSearchParams = {
 export type ConnectionAddParams = {
   memberToken: string;
   nodeId: number;
+  lang?: string;
   data?: any;
 };
 
