@@ -57,22 +57,16 @@ export const footballDataShapeHr = {
 export const categoryShape = {
   id: 2854,
   slug: 'sport',
-  slugs: { hr: 'sport', en: 'sport' },
+  slugs: { en: 'sport', hr: 'sport' },
   sectionId: 60,
   languageId: 'en',
-  publishable: {
-    isPublished: true,
-    publishedFrom: '2021-01-21T08:58:11.199',
-    publishedTo: null,
-  },
   category: { id: null, slug: null, name: null, itemCount: 3 },
   data: {
-    author: '',
     title: '',
     description: null,
     text: '',
-    name: 'sport',
     featured: false,
+    name: 'sport',
   },
   seoMetadata: '[]',
   image: null,
@@ -82,8 +76,14 @@ export const categoryShape = {
   connections: {},
   event: null,
   product: null,
+  publishable: {
+    isPublished: true,
+    publishedFrom: '2021-01-21T08:58:11.199',
+    publishedTo: null,
+  },
   collectionItems: null,
   subsections: null,
+  blocks: null,
 };
 
 // CONNECTIONS
