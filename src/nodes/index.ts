@@ -32,9 +32,13 @@ export default class SiteSailsNodeManager {
     params?: NodeGetParams,
     transformation?: NodeResponseTransformation<T>,
   ): Promise<T> {
-    return this.client.fetch(`/nodes/${this.section}/${id}`, params, {
-      transformation,
-    });
+    return this.client.fetch(
+      `/nodes/${this.section}/${encodeURIComponent(id)}`,
+      params,
+      {
+        transformation,
+      },
+    );
   }
 
   async categories<T = Node>(
