@@ -76,11 +76,7 @@ export const categoryShape = {
   connections: {},
   event: null,
   product: null,
-  publishable: {
-    isPublished: true,
-    publishedFrom: '2021-01-21T08:58:11.199',
-    publishedTo: null,
-  },
+  publishable: null,
   collectionItems: null,
   subsections: null,
   blocks: null,
@@ -111,11 +107,6 @@ export const collectionShape = {
   slugs: { hr: 'nogometna-zvijezda', en: 'fotoball-star' },
   sectionId: 67,
   languageId: 'en',
-  publishable: {
-    isPublished: true,
-    publishedFrom: '2021-01-22T09:53:00',
-    publishedTo: null,
-  },
   category: { id: 2854, slug: 'sport', name: 'sport', itemCount: null },
   data: {
     author: 'Karlo M',
@@ -133,6 +124,7 @@ export const collectionShape = {
   product: null,
   collectionItems: null,
   subsections: null,
+  publishable: null,
 };
 
 export const collectionDataEn = {
