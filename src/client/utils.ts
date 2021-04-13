@@ -19,7 +19,7 @@ async function fetchJson(url: string, options?: any) {
   try {
     let headers = options.headers || {};
 
-    if (options?.formData) {
+    if (options?.formData && options.formData.getHeaders) {
       headers = { ...headers, ...options.formData.getHeaders() };
     }
 
