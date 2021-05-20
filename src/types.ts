@@ -4,11 +4,9 @@ export type NodeCategory = {
   name: string;
 };
 
-export type NodeImage = {
+export type NodeImage = Record<string, string> & {
   id: number;
-  url: string;
-  smallUrl: string;
-  mediumUrl: string;
+  original: string;
 };
 
 export type NodeEvent = {

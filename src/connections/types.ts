@@ -6,7 +6,7 @@ export type ConnectionCategory = {
   name: string;
 };
 
-export type ConnectionImage = {
+export type ConnectionImage = Record<string, string> & {
   id: number;
   url: string;
   smallUrl: string;
