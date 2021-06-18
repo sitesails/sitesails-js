@@ -5,7 +5,8 @@ export type NodeInclude =
   | 'content'
   | 'contents'
   | 'images'
-  | 'onlytranslated';
+  | 'onlytranslated'
+  | 'linkednodes';
 
 export type NodeSearchParams = {
   category?: string | number;
