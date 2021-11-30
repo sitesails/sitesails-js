@@ -9,6 +9,7 @@ export type StripeCreateSessionParams = {
   nodeId: number;
   firstName: string;
   lastName: string;
+  memberId?: number;
 };
 
 export default class SiteSailsStripeIntegration {
@@ -36,6 +37,7 @@ export default class SiteSailsStripeIntegration {
         lastName: params.lastName,
         email: params.email,
         productIds: params.nodeId.toString(),
+        memberId: params.memberId,
       },
     };
 
