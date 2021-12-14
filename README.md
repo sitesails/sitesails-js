@@ -6,13 +6,13 @@ Full documentation is located at https://sitesails.com/docs/
 ### Installation
 
 ```
-npm install sitesails-js
+npm install sitesails
 ```
 
 or
 
 ```
-yarn add sitesails-js
+yarn add sitesails
 ```
 
 ### Basic usage
